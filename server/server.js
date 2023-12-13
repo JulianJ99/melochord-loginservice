@@ -102,6 +102,7 @@ app.post('/login', (req, res) => {
       );
     });
  
-app.listen(3001, () => {
-    console.log("running server");
-});
+    const PORT = process.env.NODE_DOCKER_PORT || 3001;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port `, PORT);
+    });
