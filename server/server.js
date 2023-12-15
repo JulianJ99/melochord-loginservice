@@ -13,13 +13,13 @@ const app = express();
 
 app.use(express.json());
 
-// app.use(
-//     cors({
-//         origin: ["http://localhost:3000"],
-//         methods: ["GET", "POST"],
-//         credentials: true,
-//     })
-// );
+ app.use(
+     cors({
+         origin: ["http://localhost:3000"],
+         methods: ["GET", "POST"],
+         credentials: true,
+     })
+ );
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -38,7 +38,7 @@ app.use (
 
 const db = mysql.createConnection({
     user: "user1",
-    host: "localhost",
+    host: "172.21.0.2",
     password: "wREobe6BtzUN.0UZ",
     database: "melochord"
  });
