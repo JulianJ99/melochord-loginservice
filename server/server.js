@@ -13,24 +13,13 @@ const app = express();
 
 app.use(express.json());
 
- app.use(
-     cors({
-      allowedHeaders: [
-        'X-ACCESS_TOKEN',
-        'Access-Control-Allow-Origin',
-        'Authorization',
-        'Origin',
-        'x-requested-with',
-        'Content-Type',
-        'Content-Range',
-        'Content-Disposition',
-        'Content-Description',
-      ],
-         origin: ["http://localhost:3000", "http://localhost:3000/login"],
-         methods: ["GET", "POST"],
-         credentials: true,
-   })
- );
+// app.use(
+//     cors({
+//         origin: ["http://localhost:3000"],
+//         methods: ["GET", "POST"],
+//         credentials: true,
+//     })
+// );
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -49,12 +38,11 @@ app.use (
 
 const db = mysql.createConnection({
     user: "user1",
-    host: "host.docker.internal",
+    host: "localhost",
     password: "wREobe6BtzUN.0UZ",
-    database: "melochord",
-    
+    database: "melochord"
  });
- console.log(host);
+
 
 app.post('/register', (req, res)=> {
 
