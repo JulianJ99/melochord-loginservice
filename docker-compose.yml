@@ -11,7 +11,9 @@ services:
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
-     - db:/var/lib/mysql
+      - db:/var/lib/mysql
+    networks:
+      - backend
 
      
 
@@ -29,8 +31,14 @@ services:
       - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - DB_NAME=$MYSQLDB_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
-    stdin_open: true
-    tty: true
+      - CLIENT_ORIGIN=$CLIENT_ORIGIN
+    networks:
+      - backend
+      - frontend
 
 volumes: 
   db:
+
+networks:
+  backend:
+  frontend:

@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+require("dotenv").config();
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -13,13 +14,12 @@ const app = express();
 
 app.use(express.json());
 
- app.use(
-     cors({
-         origin: ["http://localhost:3000"],
-         methods: ["GET", "POST"],
-         credentials: true,
-     })
- );
+var corsOptions = {
+  origin: process.env.CLIENT_ORIGIN || "http://localhost:3000",
+};
+app.use(cors(corsOptions));
+app.options('*', cors());
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -38,7 +38,7 @@ app.use (
 
 const db = mysql.createConnection({
     user: "user1",
-    host: "172.21.0.2",
+    host: "mysql",
     password: "wREobe6BtzUN.0UZ",
     database: "melochord"
  });
