@@ -7,14 +7,12 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 const app = express();
 
 app.use(express.json());
-
-const cors = require('cors')
 const corsOptions ={
     origin:['http://http://host.docker.internal:3000'], 
     credentials:true,            //access-control-allow-credentials:true
@@ -47,11 +45,11 @@ app.use (
 
 const db = mysql.createConnection({
     host: "mysqldb",
-    user: "process.env.MYSQLDB_USER",
-    password: "process.env.MYSQLDB_PASSWORD",
-    database: "process.env.MYSQLDB_DATABASE",
+    user: "user1",
+    password: "wREobe6BtzUN.0UZ",
+    database: "melochord",
  });
- console.log(db.host, db.user, db.password, db.database)
+ console.log(mysql.host, mysql.user, mysql.password, mysql.database)
  db.connect(function(err){
   if(err) throw err;
   console.log('connected!');
@@ -60,31 +58,31 @@ const db = mysql.createConnection({
 
 app.post('/register', (req, res)=> {
 
-    const username = req.body.username
-    const password = req.body.password 
+  const username = req.body.username
+  const password = req.body.password 
 
-    bcrypt.hash(password,saltRounds, (err, hash) => {
-        if (err) {
-                 console.log(err)
-             }
-             
-             db.query( 
-                 "INSERT INTO users (username, password) VALUES (?,?)",
-                 [username, hash], 
-                 (err, result)=> {
-                     console.log(err);
-                 }
-             );
-         })
-     });
- 
-     app.get("/login", (req, res) => {
-        if (req.session.user) {
-          res.send({ loggedIn: true, user: req.session.user });
-        } else {
-          res.send({ loggedIn: false });
+  bcrypt.hash(password,saltRounds, (err, hash) => {
+  if (err) {
+            console.log(err)
         }
-      });
+        
+        db.query( 
+            "INSERT INTO users (username, password) VALUES (?,?)",
+            [username, hash], 
+            (err, result)=> {
+                console.log(err);
+            }
+        );
+    })
+});
+ 
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
 
 app.post('/login', (req, res) => {
  const username = req.body.username;
@@ -116,7 +114,7 @@ app.post('/login', (req, res) => {
       );
     });
  
-    const PORT = process.env.NODE_DOCKER_PORT || 3001;
+    const PORT = process.env.NODE_LOCAL_PORT || 3001;
     app.listen(PORT, () => {
       console.log(`Server is running on port `, PORT);
     });

@@ -1,12 +1,10 @@
-FROM node:14
+FROM node:20
 
 WORKDIR /server
 COPY package.json .
 RUN npm install
 COPY . ./
 
-FROM mysql
-EXPOSE 3306
+EXPOSE 3001
 
-
-CMD ["node", "server.js", "mysql", "-h 127.0.0.1 -P 3306 -u root -p"]
+CMD ["node", "server.js"]
