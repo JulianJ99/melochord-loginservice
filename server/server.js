@@ -1,5 +1,5 @@
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -44,12 +44,11 @@ app.use (
 
 
 const db = mysql.createConnection({
-    host: "mysqldb",
+    host: "localhost",
     user: "user1",
     password: "wREobe6BtzUN.0UZ",
     database: "melochord",
  });
- console.log(mysql.host, mysql.user, mysql.password, mysql.database)
  db.connect(function(err){
   if(err) throw err;
   console.log('connected!');
