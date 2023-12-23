@@ -30,7 +30,7 @@ services:
     volumes:
       - ./server:/server
     ports:
-      - 3001:3002
+      - 3001:3001
     environment:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
       - MYSQL_USER=$MYSQLDB_USER
@@ -39,7 +39,8 @@ services:
       - MYSQL_HOST=mysqldb
       - MYSQL_PORT=3306
     extra_hosts:
-      - "localhost:127.0.0.1"
+      - localhost:127.0.0.1
+      - host.docker.internal:172.17.0.1
     networks:
       - backend
       - frontend

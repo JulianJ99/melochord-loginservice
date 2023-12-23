@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 const corsOptions ={
-    origin:['http://http://host.docker.internal:3000'], 
+    origin:['http://localhost:3000'], 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
  }
@@ -22,7 +22,7 @@ app.use(cors(corsOptions))
 
 
 app.use(function(req,res,next){  
-  res.header('Access-Control-Allow-Origin','http://http://host.docker.internal:3000')  
+  res.header('Access-Control-Allow-Origin','http://localhost:3000')  
   next(); 
 })
 
@@ -44,7 +44,7 @@ app.use (
 
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "mysqldb",
     user: "user1",
     password: "wREobe6BtzUN.0UZ",
     database: "melochord",
@@ -115,5 +115,5 @@ app.post('/login', (req, res) => {
  
     const PORT = process.env.NODE_LOCAL_PORT || 3001;
     app.listen(PORT, () => {
-      console.log(`Server is running on port `, PORT);
+      console.log(`Server is running on port`, PORT);
     });
