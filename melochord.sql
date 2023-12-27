@@ -73,6 +73,4 @@ COMMIT;
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'wREobe6BtzUN.0UZ'; 
 
 CREATE USER 'user1'@'localhost' IDENTIFIED BY 'wREobe6BtzUN.0UZ';
-GRANT ALL PRIVILEGES ON * . * TO 'user1'@'localhost';
-
-flush privileges;
+GRANT ALL PRIVILEGES ON * . * TO 'user1'@'localhost' WITH GRANT OPTION;

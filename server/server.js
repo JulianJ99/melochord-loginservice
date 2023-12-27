@@ -45,7 +45,7 @@ app.use (
 
 const db = mysql.createConnection({
     host: "mysqldb",
-    user: "user1",
+    user: "root",
     password: "wREobe6BtzUN.0UZ",
     database: "melochord",
  });
