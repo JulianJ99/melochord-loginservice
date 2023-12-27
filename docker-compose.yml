@@ -40,7 +40,7 @@ services:
       - MYSQL_PORT=3306
     extra_hosts:
       - localhost:127.0.0.1
-      - host.docker.internal:172.17.0.1
+      - host.docker.internal:172.26.0.3
     networks:
       - backend
       - frontend
