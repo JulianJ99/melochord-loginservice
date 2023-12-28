@@ -17,6 +17,8 @@ services:
       - db:/var/lib/mysql
     networks:
       - backend
+    cpu_period: 50000
+    cpu_quota: 25000  
 
   loginservice:
     depends_on:
@@ -44,7 +46,8 @@ services:
     networks:
       - backend
       - frontend
-        
+    cpu_period: 50000
+    cpu_quota: 25000
 
 volumes: 
   db:
